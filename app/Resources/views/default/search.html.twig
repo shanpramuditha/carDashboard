@@ -58,10 +58,14 @@
                     <label for="brand">Fuel MPG</label>
                     <input type="number" class="form-control" id="fuel" name="fuel" value="{{ fuel }}">
                 </div>
-                <div class="form-group col-md-3 col-sm-6 black_input">
-                    <label for="model">No of wheels</label>
-                    <input type="number" class="form-control" id="wheels" name="wheels" value="{{ wheels }}" min="1" max="64">
-                </div>
+                    <div class="form-group col-md-6 col-sm-6 black_input">
+                        <label for="price_range" class="form-label">Wheels</label>
+                        {% if price | length == 2 %}
+                            <input name="wheels" id="wheels" type="text" class="span2" value="" data-slider-min="0" data-slider-max="16" data-slider-step="1" data-slider-value="[{{ wheels[0] }},{{ wheels[1] }}]"/>
+                        {% else %}
+                            <input name="wheels" id="wheels" type="text" class="span2" value="" data-slider-min="0" data-slider-max="16" data-slider-step="1" data-slider-value="[0,16]"/>
+                        {% endif %}
+                    </div>
                 <div class="form-group col-md-3 col-sm-6 black_input">
                     <label for="model">No of doors</label>
                     <input type="number" class="form-control" id="doors" name="doors" value="{{ doors }}" min="1" max="64">

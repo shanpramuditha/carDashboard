@@ -12,9 +12,9 @@ class DashboardController extends DefaultController
      */
     public function searchAction(Request $request){
         $fuel = $request->get('fuel');
-        $wheels = $request->get('wheels');
         $doors = $request->get('doors');
         $price = explode(",",$request->get('price'));
+        $wheels = explode(",",$request->get('wheels'));
         $speed = explode(",",$request->get('speed'));
         $convertable = $request->get('convertable');
         $em = $this->getDoctrine()->getManager();
