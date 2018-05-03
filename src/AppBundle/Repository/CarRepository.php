@@ -19,10 +19,7 @@ class CarRepository extends EntityRepository
             $qb->where('o.fuel <= :fuel')
                 ->setParameter('fuel', $fuel);
         }
-        if($wheels != null or $wheels != "") {
-            $qb->andWhere('o.wheels <= :wheels')
-                ->setParameter('wheels', $wheels);
-        }
+
         if($doors != null or $doors != ""){
             $qb->andWhere('o.doors <= :doors')
                 ->setParameter('doors',$doors);
@@ -42,17 +39,20 @@ class CarRepository extends EntityRepository
                 ->setParameter('low', floatval($price[0]))
                 ->setParameter('high', floatval($price[1]));
         }
+
+
         if(count($wheels) == 2){
             $qb->andWhere(
                 $qb->expr()->between(
                     'o.wheels',
-                    ':low',
-                    ':high'
+                    ':lowWheels',
+                    ':highWheels'
                 )
             )
                 ->setParameter('lowWheels', floatval($wheels[0]))
                 ->setParameter('highWheels', floatval($wheels[1]));
         }
+
         if(count($speed) == 2){
             $qb->andWhere(
                 $qb->expr()->between(
