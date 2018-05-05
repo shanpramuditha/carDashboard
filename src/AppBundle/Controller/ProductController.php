@@ -25,9 +25,16 @@ class ProductController extends DefaultController
         $form = $this->createForm(CarType::class,$car);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() and $form->isValid()){
+//        and $form->isValid()
+        if($form->isSubmitted()){
             $car->setActive(true);
 
+//            die($car->getPriceStr());
+//            $price = $car->getPrice();
+//            $priceStr =strval($price);
+//            $priceStr1 = str_replace("$", "",$priceStr);
+//            $priceStr = str_replace(",", "",$priceStr);
+//            $car->setPrice(floatval($priceStr1));
 
             $this->insert($car);
             return $this->redirectToRoute('product_list');
