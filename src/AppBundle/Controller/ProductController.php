@@ -27,6 +27,8 @@ class ProductController extends DefaultController
 
         if($form->isSubmitted() and $form->isValid()){
             $car->setActive(true);
+
+
             $this->insert($car);
             return $this->redirectToRoute('product_list');
         }

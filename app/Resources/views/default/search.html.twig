@@ -54,58 +54,55 @@
         <h3>Find Your Dream Car <span>(Easy search from here)</span></h3>
             <form method="get">
                 <div class="row">
-                <div class="form-group col-md-3 col-sm-6 black_input">
-                    <label for="brand">Fuel MPG</label>
-                    <input type="number" class="form-control" id="fuel" name="fuel" value="{{ fuel }}">
-                </div>
-
                     <div class="form-group col-md-6 col-sm-6 black_input">
-                        <label for="wheels" class="form-label">Wheels</label>
-                        {% if wheels | length == 2 %}
-                            <input name="wheels" id="wheels" type="text" class="span2" value="" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="[{{ wheels[0] }},{{ wheels[1] }}]"/>
+                        {#<label for="fuel">Fuel MPG</label>#}
+                        {#<input type="number" class="form-control" id="fuel" name="fuel" value="{{ fuel }}">#}
+                        <label for="fuel" class="form-label">Fuel MPG</label>
+                        {% if fuel | length == 2 %}
+                            <input name="fuel" id="fuel" type="text" class="span2" value="" data-slider-min="0" data-slider-max="500" data-slider-step="1" data-slider-value="[{{ fuel[0] }},{{ fuel[1] }}]"/>
                         {% else %}
-                            <input name="wheels" id="wheels" type="text" class="span2" value="" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="[0,20]"/>
+                            <input name="fuel" id="fuel" type="text" class="span2" value="" data-slider-min="0" data-slider-max="500" data-slider-step="1" data-slider-value="[0,500]"/>
                         {% endif %}
                     </div>
 
-                <div class="form-group col-md-3 col-sm-6 black_input">
-                    <label for="model">No of doors</label>
-                    <input type="number" class="form-control" id="doors" name="doors" value="{{ doors }}" min="1" max="64">
-                </div>
+                    <div class="form-group col-md-3 col-sm-6 black_input">
+                        <input type="radio" name="wheels" value="2" {% if wheels == 2 %}checked{% endif %}> 2 Wheel<br>
+                        <input type="radio" name="wheels" value="4" {% if wheels == 4 %}checked{% endif %}> 4 Wheel<br>
+                    </div>
+
+                    <div class="form-group col-md-3 col-sm-6 black_input">
+                        <input type="radio" name="doors" value="2" {% if doors == 2 %}checked{% endif %}> 2 Door<br>
+                        <input type="radio" name="doors" value="4" {% if doors == 4 %}checked{% endif %}> 4 Door<br>
+                    </div>
                 </div>
 
                 <div class="row">
-
-                <div class="form-group col-md-6 col-sm-6 black_input">
-                    <label for="price_range" class="form-label">Price Range ($)</label>
-                    {% if price | length == 2 %}
-                        <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ price[0] }},{{ price[1] }}]"/>
-                    {% else %}
-                        <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[0,5000]"/>
-                    {% endif %}
+                    <div class="form-group col-md-6 col-sm-6 black_input">
+                        <label for="price_range" class="form-label">Price Range ($)</label>
+                        {% if price | length == 2 %}
+                            <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ price[0] }},{{ price[1] }}]"/>
+                        {% else %}
+                            <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[0,5000]"/>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6 black_input">
+                        <label for="speed_range" class="form-label">Speed Range Km/H</label>
+                        {% if speed | length == 2 %}
+                            <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ speed[0] }},{{ speed[1] }}]"/>
+                        {% else %}
+                            <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[0,5000]"/>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-6 black_input">
-                    <label for="speed_range" class="form-label">Speed Range Km/H</label>
-                    {% if speed | length == 2 %}
-                        <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ speed[0] }},{{ speed[1] }}]"/>
-                    {% else %}
-                        <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[0,5000]"/>
-                    {% endif %}
-                </div>
-
-                </div>
-
-
-
 
                 <div class="form-group">
-                    <input type="checkbox" class="checkbox" {% if convertable == "on" %}checked{% endif %} name="convertable" > Convertable
+                    <input type="checkbox" class="checkbox" {% if convertable == 1 %}checked{% endif %} name="convertable" > Convertable
                 </div>
 
                 <div class="row">
-                <div class="form-group col-md-3 col-sm-6 pull-right">
-                    <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car </button>
-                </div>
+                    <div class="form-group col-md-3 col-sm-6 pull-right">
+                        <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car </button>
+                    </div>
                 </div>
             </form>
         </div>

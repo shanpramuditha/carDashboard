@@ -11,12 +11,16 @@ class DashboardController extends DefaultController
      * @Route("/", name="search")
      */
     public function searchAction(Request $request){
-        $fuel = $request->get('fuel');
+        $fuel = explode(",", $request->get('fuel'));
         $doors = $request->get('doors');
         $price = explode(",",$request->get('price'));
-        $wheels = explode(",",$request->get('wheels'));
+        $wheels = $request->get('wheels');
+
         $speed = explode(",",$request->get('speed'));
         $convertable = $request->get('convertable');
+        if ($convertable != null){
+            $convertable = 1;
+        }
         $em = $this->getDoctrine()->getManager();
 
         $cars = $em->getRepository('AppBundle:Car')->search($fuel,$wheels,$price,$doors,$speed,$convertable);

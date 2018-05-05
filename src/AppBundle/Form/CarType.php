@@ -17,8 +17,18 @@ class CarType extends AbstractType
             ->add('model')
             ->add('price')
             ->add('topSpeed')
-            ->add('doors')
-            ->add('wheels')
+            ->add('doors', ChoiceType::class, array(
+                'choices' => array(
+                    '2' => 2,
+                    '4' => 4,
+                )
+            ))
+            ->add('wheels', ChoiceType::class, array(
+                'choices'  => array(
+                    '2' => 2,
+                    '4' => 4,
+                ),
+            ))
             ->add('engine')
             ->add('fuel')
             ->add('torque')
