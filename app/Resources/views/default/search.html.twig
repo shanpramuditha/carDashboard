@@ -120,6 +120,14 @@
     </div>
 </section>
 
+<section class="listing-page">
+    <div class="container">
+        <div class="row">
+            <div id="container" style="min-width: 310px;max-width: 800px;height: 400px;margin: 0 auto"></div>
+        </div>
+    </div>
+</section>
+
 <div class="container">
     <div class="row">
         <table id="myTable">
@@ -151,6 +159,77 @@
     </div>
 </div>
 
+<script>
+    var carDetails = new Array();
+
+    {% for car in cars %}
+        var dataSet = new Array();
+        var name = '{{ car.brand }}' +' '+ '{{ car.model }}';
+        var data = [{{ car.fuel }}, {{ car.wheels}}, {{ car.price }}, {{ car.topSpeed }}, {{ car.doors }}];
+        dataSet['name'] = name;
+        dataSet['data'] = data;
+        carDetails.push(dataSet);
+    {% endfor %}
+
+    Highcharts.chart('container', {
+
+        title: {
+            text: 'Car Comparison Graph'
+        },
+
+        subtitle: {
+            text: 'Source: thesolarfoundation.com'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Value'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        xAxis: {
+            categories: ['Fuel', 'Wheels', 'Price', 'Speed', 'Doors']
+        },
+        series:carDetails,
+
+        // series: [{
+        //     name: 'Installation',
+        //     data: [43934, 52503, 57177, 69658, 97031]
+        // }, {
+        //     name: 'Manufacturing',
+        //     data: [24916, 24064, 29742, 29851, 32490]
+        // }, {
+        //     name: 'Sales & Distribution',
+        //     data: [11744, 17722, 16005, 19771, 20185]
+        // }, {
+        //     name: 'Project Development',
+        //     data: [null, null, 7988, 12169, 15112]
+        // }, {
+        //     name: 'Other',
+        //     data: [12908, 5948, 8105, 11248, 8989]
+        // }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
 
 <script>
     Highcharts.chart('graph', {

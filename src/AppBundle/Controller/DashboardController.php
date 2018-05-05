@@ -27,7 +27,7 @@ class DashboardController extends DefaultController
             'speed'=>$speed,
             'doors'=>$doors,
             'convertable'=>$convertable,
-            'cars'=>$cars
+            'cars'=>$cars,
         ));
     }
 
