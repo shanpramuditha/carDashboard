@@ -15,13 +15,13 @@ class CarRepository extends EntityRepository
     public function search($fuel,$wheels,$price,$doors,$speed,$convertable){
         $qb = $this->createQueryBuilder('o');
         $qb->select('o');
-        if($fuel != null or $fuel != "") {
-            $qb->where('o.fuel <= :fuel')
-                ->setParameter('fuel', $fuel);
+        if($wheels != null or $wheels != "") {
+            $qb->where('o.wheels = :wheels')
+                ->setParameter('wheels', $wheels);
         }
 
         if($doors != null or $doors != ""){
-            $qb->andWhere('o.doors <= :doors')
+            $qb->andWhere('o.doors >= :doors')
                 ->setParameter('doors',$doors);
         }
         if($convertable == "on"){
