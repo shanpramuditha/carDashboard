@@ -28,6 +28,7 @@ class CarRepository extends EntityRepository
             $qb->andWhere('o.convertable = :convertable')
                 ->setParameter('convertable',true);
         }
+
         if(count($price) == 2){
             $qb->andWhere(
                 $qb->expr()->between(
@@ -41,7 +42,7 @@ class CarRepository extends EntityRepository
         }
 
 
-        if(count($wheels) == 2){
+        if($wheels != null and count($wheels) == 2){
             $qb->andWhere(
                 $qb->expr()->between(
                     'o.wheels',

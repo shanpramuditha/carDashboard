@@ -27,6 +27,15 @@ class ProductController extends DefaultController
 
 //        and $form->isValid()
         if($form->isSubmitted()){
+            $car->setPrice((float)str_replace("$","",$car->getPrice()));
+            $car->setPrice((float)str_replace(" ","",$car->getPrice()));
+            $car->setPrice((float)str_replace(",","",$car->getPrice()));
+
+
+            $car->setEngine((float)str_replace("cc","",$car->getEngine()));
+            $car->setEngine((float)str_replace("CC","",$car->getEngine()));
+            $car->setEngine((float)str_replace(",","",$car->getEngine()));
+
             $car->setActive(true);
 
 //            die($car->getPriceStr());
@@ -66,6 +75,14 @@ class ProductController extends DefaultController
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
+            $car->setPrice((float)str_replace("$","",$car->getPrice()));
+            $car->setPrice((float)str_replace(" ","",$car->getPrice()));
+            $car->setPrice((float)str_replace(",","",$car->getPrice()));
+
+
+            $car->setEngine((float)str_replace("cc","",$car->getEngine()));
+            $car->setEngine((float)str_replace("CC","",$car->getEngine()));
+            $car->setEngine((float)str_replace(",","",$car->getEngine()));
             $this->insert($car);
             return $this->redirectToRoute('product_list');
 
